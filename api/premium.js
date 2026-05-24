@@ -7,7 +7,7 @@ export default function handler(req, res) {
       price: "$0.1",
       network: "eip155:8453",
       payTo: payTo,
-      description: "Unlock premium content"
+      description: "Mở khóa nội dung premium"
     }]
   }));
 
