@@ -16,14 +16,29 @@
       <p class="text-4xl font-bold text-green-400 mt-1">$0.1 USDC</p>
     </div>
 
-    <button onclick="pay()" class="w-full bg-blue-600 hover:bg-blue-700 py-5 rounded-2xl text-xl font-medium">
+    <button onclick="payWithX402()" 
+            class="w-full bg-blue-600 hover:bg-blue-700 py-5 rounded-2xl text-xl font-medium transition">
       Mở khóa ngay bằng x402
     </button>
   </div>
 
   <script>
-    function pay() {
-      window.location.href = '/api/premium';
+    async function payWithX402() {
+      try {
+        const response = await fetch('/api/premium', {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' }
+        });
+
+        if (response.status === 402) {
+          console.log("✅ x402 detected");
+          // Cách trigger ví mạnh nhất
+          window.location.href = '/api/premium';
+          return;
+        }
+      } catch (e) {
+        console.error(e);
+      }
     }
   </script>
 </body>
