@@ -1,6 +1,10 @@
 export default function handler(req, res) {
   const payTo = process.env.PAY_TO;
 
+  if (!payTo) {
+    return res.status(500).json({ error: "PAY_TO chưa được thiết lập" });
+  }
+
   res.setHeader('x402-payment-required', JSON.stringify({
     accepts: [{
       scheme: "exact",
@@ -11,5 +15,5 @@ export default function handler(req, res) {
     }]
   }));
 
-  res.status(402).json({ message: "Payment Required" });
+  return res.status(402).json({ message: "Payment Required" });
 }
