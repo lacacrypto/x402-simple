@@ -6,7 +6,7 @@
   <title>x402 Payment</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-950 text-white min-h-screen flex items-center justify-center">
+<body class="bg-gray-950 text-white min-h-screen flex items-center justify-center p-4">
   <div class="max-w-md w-full bg-gray-900 rounded-3xl p-10 text-center border border-gray-700">
     <h1 class="text-4xl font-bold mb-2">🔐 x402 Payment</h1>
     <p class="text-gray-400 mb-8">Thanh toán USDC trên Base</p>
@@ -16,34 +16,14 @@
       <p class="text-4xl font-bold text-green-400 mt-1">$0.1 USDC</p>
     </div>
 
-    <button onclick="payWithX402()" 
-            class="w-full bg-blue-600 hover:bg-blue-700 py-5 rounded-2xl text-xl font-medium">
+    <button onclick="pay()" class="w-full bg-blue-600 hover:bg-blue-700 py-5 rounded-2xl text-xl font-medium">
       Mở khóa ngay bằng x402
     </button>
   </div>
 
   <script>
-    async function payWithX402() {
-      try {
-        const response = await fetch('/api/premium', {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' }
-        });
-
-        if (response.status === 402) {
-          console.log("✅ x402 detected - Opening wallet...");
-          // Cách trigger mạnh nhất hiện nay
-          window.location.href = '/api/premium';
-          return;
-        }
-
-        if (response.ok) {
-          alert("✅ Thanh toán thành công!");
-        }
-      } catch (err) {
-        console.error(err);
-        alert("Lỗi kết nối. Vui lòng thử lại.");
-      }
+    function pay() {
+      window.location.href = '/api/premium';
     }
   </script>
 </body>
