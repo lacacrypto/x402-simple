@@ -25,13 +25,19 @@
   <script>
     async function payWithX402() {
       try {
-        const response = await fetch('/api/premium');
-        
+        const response = await fetch('/api/premium', {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' }
+        });
+
         if (response.status === 402) {
-          console.log("x402 Payment Required - Ví đang mở...");
-          // Trigger lại để ví nhận diện
+          console.log("✅ x402 detected - Opening wallet...");
+          // Cách trigger mạnh nhất hiện nay
           window.location.href = '/api/premium';
-        } else if (response.ok) {
+          return;
+        }
+
+        if (response.ok) {
           alert("✅ Thanh toán thành công!");
         }
       } catch (err) {
